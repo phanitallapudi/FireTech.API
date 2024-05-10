@@ -1,4 +1,5 @@
-from langchain.chains import LLMChain
+from langchain.chains import LLMChain, ConversationChain
+from langchain.memory import ConversationBufferMemory
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.prompts import PromptTemplate
 from app.classes.base_llm_class import BaseLLMClass
@@ -8,7 +9,7 @@ from utils.template_utils import generate_scenario, generate_realtime_responses
 
 class EmergencyResponseSimulator(BaseLLMClass):
     def __init__(self) -> None:
-        pass
+        self.memory = ConversationBufferMemory(memory_key="history", k=5)
 
     def generate_scenario_parser(self):
         return JsonOutputParser(pydantic_object=EmergencyScenario)
@@ -29,14 +30,19 @@ class EmergencyResponseSimulator(BaseLLMClass):
     def generate_response_scenario(self, trainee_response, scenario):
         prompt = PromptTemplate(
             template=generate_realtime_responses,
-            input_variables=["previous_data", "trainee_input"]
-        )
-        llm_chain = LLMChain(
-            prompt=prompt,
-            llm=self.get_llm()
+            input_variables=["query"]
         )
 
-        llm_response = llm_chain({"previous_data": scenario, "trainee_input": trainee_response})
+        data_to_be_sent = f"trainee_response : {trainee_response}\nscenario: {scenario}"
+
+        chain = ConversationChain(
+            llm=self.get_llm(),
+            memory=self.memory
+        )
+
+        formatted_prompt: str = prompt.format(query=data_to_be_sent)
+
+        llm_response = chain(formatted_prompt)
         return llm_response
         
 

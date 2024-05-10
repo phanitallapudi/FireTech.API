@@ -9,6 +9,7 @@ from utils.template_utils import generate_scenario, generate_realtime_responses
 
 class EmergencyResponseSimulator(BaseLLMClass):
     def __init__(self) -> None:
+        super().__init__()
         self.memory = ConversationBufferMemory(memory_key="history", k=5)
 
     def generate_scenario_parser(self):

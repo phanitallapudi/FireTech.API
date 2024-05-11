@@ -9,3 +9,5 @@ pytest
 uvicorn
 aiofiles
 unstructured
+pandas
+scikit-learn

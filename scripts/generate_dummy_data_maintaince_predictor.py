@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 
-def generate_dummy_maintenance_data(num_records=500, num_equipment=50):
+def generate_dummy_maintenance_data(num_records=5000, num_equipment=500):
     np.random.seed(0)
     
     # Generate dummy historical maintenance data
@@ -41,7 +41,7 @@ def generate_dummy_maintenance_data(num_records=500, num_equipment=50):
     
     return maintenance_df
 
-def generate_dummy_performance_data(num_equipment=500):
+def generate_dummy_performance_data(num_equipment=5000):
     np.random.seed(0)
     
     # Generate dummy current performance metrics data
@@ -67,5 +67,5 @@ performance_df = generate_dummy_performance_data()
 merged_data = pd.merge(maintenance_df, performance_df, on='Equipment_ID')
 
 # Save the merged data to a new CSV file
-merged_data.to_csv('merged_dataq.csv', index=False)
+merged_data.to_csv('merged_data.csv', index=False)
 print("Merged data saved to CSV file: merged_data.csv")

@@ -6,9 +6,10 @@ emp = EquipmentMaintainancePredictor()
 router = APIRouter()
 
 @router.post('/predict_maintenance')
-async def predict_maintenance_for_equipment(operating_hours: int = Query(..., title="operating hours", description="Enter the operating hours"),
+async def predict_maintenance_for_equipment(equiment_id: int = Query(..., title="equiment id", description="Enter the equiment id"),
+                                            operating_hours: int = Query(..., title="operating hours", description="Enter the operating hours"),
                                             temperature: int = Query(..., title="temperature", description="Enter the temperature"),
                                             pressure: int = Query(..., title="pressure", description="Enter the pressure")):
     
-    response = emp.predict_maintenance(operating_hours=operating_hours, temperature=temperature, pressure=pressure)
+    response = emp.predict_maintenance(equipment_id=equiment_id, operating_hours=operating_hours, temperature=temperature, pressure=pressure)
     return JSONResponse(content=response, status_code=200)

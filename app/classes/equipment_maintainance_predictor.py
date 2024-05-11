@@ -8,13 +8,23 @@ class EquipmentMaintainancePredictor:
     def __init__(self) -> None:
         pass
 
-    def predict_maintenance(self, operating_hours, temperature, pressure):
+    def predict_maintenance(self, equipment_id, operating_hours, temperature, pressure):
         # Load data
         merged_df = pd.read_csv('merged_data.csv')
 
+        # Filter data for the specified equipment ID
+        equipment_data = merged_df[merged_df['Equipment_ID'] == equipment_id]
+
         # Features and target variable
-        X = merged_df[['Operating_Hours', 'Temperature', 'Pressure']]
-        y = merged_df['Maintenance_Type']
+        X = equipment_data[['Operating_Hours', 'Temperature', 'Pressure']]
+        y = equipment_data['Maintenance_Type']
+
+        # Check for class imbalance
+        class_counts = y.value_counts()
+        min_class_count = class_counts.min()
+
+        # Determine the maximum number of splits in cross-validation
+        max_splits = min(5, min_class_count)  # Adjust as needed
 
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
@@ -26,7 +36,7 @@ class EquipmentMaintainancePredictor:
         }
 
         # Reduce the size of the parameter grid for faster search
-        grid_search = GridSearchCV(RandomForestClassifier(random_state=42), param_grid, cv=5)
+        grid_search = GridSearchCV(RandomForestClassifier(random_state=42), param_grid, cv=max_splits)
         grid_search.fit(X_train, y_train)
 
         # Get the best model

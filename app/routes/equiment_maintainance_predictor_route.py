@@ -11,5 +11,5 @@ async def predict_maintenance_for_equipment(equiment_id: int = Query(..., title=
                                             temperature: int = Query(..., title="temperature", description="Enter the temperature"),
                                             pressure: int = Query(..., title="pressure", description="Enter the pressure")):
     
-    response = emp.predict_maintenance(equipment_id=equiment_id, operating_hours=operating_hours, temperature=temperature, pressure=pressure)
+    response = emp.predict_maintenance_type_cost(equipment_id=equiment_id, operating_hours=operating_hours, temperature=temperature, pressure=pressure)
     return JSONResponse(content=response, status_code=200)

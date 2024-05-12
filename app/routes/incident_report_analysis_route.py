@@ -20,3 +20,8 @@ async def generate_incident_report_analysis(incident_report: str = Query(None, t
     
     response = ira.analyze_file_report(directory=storage_directory)
     return JSONResponse(content=response, status_code=200)
+
+@router.get('/generate_casualties_count_charts')
+async def generate_casualties_count_charts(data: str = Query(None, title="data", description="Enter the data")):
+    response = ira.generate_casualties_count_charts(data=data)
+    return JSONResponse(content=response, status_code=200)

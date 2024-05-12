@@ -27,3 +27,26 @@ Post-Incident Review:
 Conducting a thorough post-incident review can identify lessons learned and areas for improvement in training, equipment, and operational procedures. Collaborative debriefings involving all stakeholders facilitate knowledge sharing and enhance overall preparedness for future incidents.
 
 Here is the data you need to analyze : {query}"""
+
+get_casualties_count_template = """You will be given some information about a fire response analysis report, you find extra these information and just give the count of the casualties, this is the data you need to use to figure out {data}
+
+- no_injuries
+- minor_injuries
+- moderate_injuries
+- major_injuries
+- injured_civilians
+- injured_firefighters
+
+example :
+
+no_injuries : 4
+minor_injuries : 2
+moderate_injuries : 2
+major_injuries : 0
+injured_civilians : 7
+injured_firefighters : 1
+
+NOTE: strictly return only the number and nothing else not even any letters also the total count of injured_civilians and injured_firefighters should tally with all the total count of injuries, also you need to classify the injury serioursness based on the data, if you dont have an information about these fields just return 0.
+
+Now take a deep breath and give me the numbers :)
+"""

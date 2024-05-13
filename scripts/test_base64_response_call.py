@@ -37,11 +37,11 @@ On September 15, 2024, a Category 4 hurricane made landfall along the Gulf Coast
 
 As the storm approached, local authorities issued mandatory evacuation orders for low-lying coastal regions and implemented emergency preparedness measures to safeguard residents and mitigate potential casualties. Despite these efforts, the intensity of Hurricane Delta posed significant challenges to emergency response operations.
 
-        no_injuries="1000",
+        no_injuries="7",
         minor_injuries="10",
         moderate_injuries="3",
         major_injuries="0",
-        injured_civilians="13",
+        injured_civilians="12",
         injured_firefighters="1"
 
 Tactics Used:
@@ -60,7 +60,7 @@ Evacuation Preparedness: Enhancing public awareness and outreach initiatives reg
 Critical Infrastructure Resilience: Investing in resilient infrastructure designs, such as storm-resistant buildings and flood mitigation measures, can minimize damage and disruption to essential services during severe weather events.
 Interagency Coordination: Strengthening collaboration between local, state, and federal agencies, as well as non-governmental organizations and volunteer groups, enhances resource allocation and response coordination, fostering a more effective and cohesive disaster response framework. Additionally, conducting post-incident debriefings and after-action reviews enables stakeholders to identify areas for improvement and implement lessons learned to enhance future emergency response capabilities.
 """
-endpoint_url = f'http://127.0.0.1:8000/generate_charts?data={data}'
+endpoint_url = f'http://127.0.0.1:8000/generate_casualties_count_charts?data={data}'
 # Fetch JSON data from the endpoint
 json_data = fetch_json_data_from_endpoint(endpoint_url)
 

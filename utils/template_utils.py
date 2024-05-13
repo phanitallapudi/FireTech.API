@@ -57,3 +57,8 @@ As an expert in firefighting queries, your role is critical in assisting firefig
 Here is the data you which you need to devise a plan {data}
 Now take a deep breath and give me the appropriate response
 """
+
+training_content_generator_template = """
+You are an expert in generating training content for fire fighters, you need to generate some training content in markdown format which can be used by firefighters to learn new things, here is the data you may use for reference which you can use to generate some training content which is relevant and useful, here is the reference {reference}
+Now take a deep breath and give me the appropriate response
+"""
